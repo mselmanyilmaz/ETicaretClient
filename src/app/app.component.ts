@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+// import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from './services/ui/custom-toastr.service';
 import { MessageType } from './services/admin/alertify.service';
-// declare var $: any
+declare var $: any
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,7 @@ import { MessageType } from './services/admin/alertify.service';
 export class AppComponent {
   title = 'ETicaretClient';
 
-  constructor(private tosastrService: CustomToastrService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private toastrService: CustomToastrService) {
     // tosastrService.message("Selman", "Succes", {
     //   messageType: ToastrMessageType.Success,
     //   position: ToastrPosition.TopLeft,
@@ -33,6 +35,17 @@ export class AppComponent {
     //   position: ToastrPosition.TopRight,
     //   timeOut: 3000
     // });
+
+    // if (isPlatformBrowser(this.platformId)) {
+    //   $(document).ready(() => {
+    //     alert("Merhaba");
+    //   });
+    // }
+
+    // if (isPlatformBrowser(this.platformId)){
+    //   $.get("https://localhost:7273/api/Products", data =>
+    //   console.log(data))
+    //   }
   }
 }
 
